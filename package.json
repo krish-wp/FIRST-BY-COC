@@ -1,0 +1,15 @@
+{
+  "name": "bigp",
+  "version": "1.0.0",
+  "description": "backend by chai or code",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "chai",
+    "krish"
+  ],
+  "author": "krish",
+  "license": "ISC"
+}
