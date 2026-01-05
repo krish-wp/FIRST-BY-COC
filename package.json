@@ -2,14 +2,22 @@
   "name": "bigp",
   "version": "1.0.0",
   "description": "backend by chai or code",
-  "main": "server.js",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.js"
   },
   "keywords": [
     "chai",
     "krish"
   ],
   "author": "krish",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "touch": "^3.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11",
+    "prettier": "^3.7.4"
+  }
 }
