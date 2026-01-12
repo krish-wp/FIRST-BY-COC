@@ -13,6 +13,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 
 
 
+
 const registerUser = asyncHandler(async (req,res) => {
 
     const {fullname , email , username , password} = req.body
@@ -48,15 +49,17 @@ const registerUser = asyncHandler(async (req,res) => {
         throw new ApiError(400,"User already exist");
     }
 
-    const avatarLocalPath = req.files?.avatar[0]?.path;
-    const coverImageLocalPath = req.files?.converImage[0]?.path;
+    console.log(req.files)
+
+    const avatarLocalPath = req.files?.avatar?.[0]?.path;
+    const coverImageLocalPath = req.files?.coverImage?.[0]?.path;
+
 
     if(!avatarLocalPath)
     {
         throw new ApiError(400, "Avarat is required");
     }
 
-    
     const avatar =  await uploadOnCloudinary(avatarLocalPath);
     const coverImage = await uploadOnCloudinary(coverImageLocalPath);
 
@@ -66,16 +69,17 @@ const registerUser = asyncHandler(async (req,res) => {
         throw new ApiError(400, "Avarat is required");
     }
 
+     console.log("here1");
+
     const user = await User.create({
         fullname,
-        avatar: avatar.url,
-        coverImage: coverImage.url?.url || "",
+        avatar : avatar?.url,
         email,
         password,
-        username : usernameLower
+        username : usernameLower,
+        coverImage : coverImage?.url || ""
 
     })
-    console.log("here");
 
     const createdUser  = await User.findById(user._id).select(
         "-password -refreshToken "

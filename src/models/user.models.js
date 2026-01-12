@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
     password : {
         type : String,
         required : [true , "password is required"],
-        lowecase : true,
+        lowercase : true,
         trim : true,
     },
     refreshToken : {
@@ -53,7 +53,7 @@ const userSchema = new mongoose.Schema({
     }
 )
 
-userSchema.pre("save" , async (next) => {
+userSchema.pre("save" , async function(next) {
     if(!this.isModified("password") ) return next();
 
     this.password = await bcrypt.hash(this.password,10)
