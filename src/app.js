@@ -29,4 +29,5 @@ import userRouter from './routes/user.route.js'
 //routes declration
 app.use('/api/v1/users' , userRouter)
 
+
 export{ app }
