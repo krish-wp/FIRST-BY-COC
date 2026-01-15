@@ -33,11 +33,11 @@ router.route("/refresh-token").post(refreshAccessToken);
 
 router.route("/change-password").post(upload.none(),verifyJWT , changeCurrentPassword);
 
-router.route("/channel").post(upload.none(),getUserChannelProfile)
+router.route("/channel/:username").get(verifyJWT,getUserChannelProfile)
 
-router.route("/watch-history").post(upload.none(), verifyJWT , getWatchHistory)
+router.route("/watch-history").get(verifyJWT , getWatchHistory)
 
-router.route("/current-user").post(verifyJWT , getCurrentUser);
+router.route("/current-user").get(verifyJWT , getCurrentUser);
 
 
 export default router

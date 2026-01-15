@@ -301,8 +301,7 @@ const getCurrentUser = asyncHandler(async (req,res) => {
 
 
 const getUserChannelProfile = asyncHandler(async (req,res) => {
-    const {username} = req.query;
-    console.log(req.query);
+    const {username} = req.params;
 
     if(!username) 
     {
@@ -378,7 +377,6 @@ const getUserChannelProfile = asyncHandler(async (req,res) => {
 });
 
 const getWatchHistory = asyncHandler(async (req , res) => {
-    console.log(req.user)
     const user = await User.aggregate(
         {
             $match : {
