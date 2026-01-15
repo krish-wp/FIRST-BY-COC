@@ -1,33 +1,37 @@
 {
-  "name": "bigp",
-  "version": "1.0.0",
-  "description": "backend by chai or code",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "dev": "nodemon -r dotenv/config src/index.js"
-  },
-  "keywords": [
-    "chai",
-    "krish"
-  ],
-  "author": "krish",
-  "license": "ISC",
-  "dependencies": {
-    "bcrypt": "^6.0.0",
-    "cloudinary": "^2.8.0",
-    "cookie-parser": "^1.4.7",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "express": "^5.2.1",
-    "jsonwebtoken": "^9.0.3",
-    "mongoose": "^8.21.0",
-    "mongoose-aggregate-paginate-v2": "^1.1.4",
-    "multer": "^2.0.2",
-    "touch": "^3.1.1"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.11",
-    "prettier": "^3.7.4"
-  }
+    "name": "bigp",
+    "version": "1.0.0",
+    "description": "backend by chai or code",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "dev": "nodemon -r dotenv/config src/index.js"
+    },
+    "keywords": [
+        "chai",
+        "krish"
+    ],
+    "author": "krish",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^6.0.0",
+        "cloudinary": "^2.8.0",
+        "cookie-parser": "^1.4.7",
+        "cors": "^2.8.5",
+        "dotenv": "^17.2.3",
+        "express": "^5.2.1",
+        "jsonwebtoken": "^9.0.3",
+        "mongoose": "^8.21.0",
+        "mongoose-aggregate-paginate-v2": "^1.1.4",
+        "multer": "^2.0.2",
+        "touch": "^3.1.1"
+    },
+    "devDependencies": {
+        "add": "^2.0.6",
+        "eslint": "^8.57.1",
+        "nodemon": "^3.1.11",
+        "prettier": "^3.8.0",
+        "prettier-eslint": "^16.4.2",
+        "yarn": "^1.22.22"
+    }
 }
