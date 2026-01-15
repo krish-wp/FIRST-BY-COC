@@ -30,4 +30,12 @@ import userRouter from './routes/user.route.js'
 app.use('/api/v1/users' , userRouter)
 
 
+app.use((req, res, next) => {
+    console.log("Headers:", req.headers);
+    console.log("Body:", req.body);
+    next();
+});
+
+
+
 export{ app }
