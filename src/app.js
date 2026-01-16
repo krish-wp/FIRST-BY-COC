@@ -23,9 +23,11 @@ app.use(cookieParser());
 //routes import
 
 import userRouter from "./routes/user.route.js";
+import videoRouter from "./routes/video.route.js";
 
 //routes declration
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/videos", videoRouter);
 
 app.use((req, res, next) => {
     console.log("Headers:", req.headers);
