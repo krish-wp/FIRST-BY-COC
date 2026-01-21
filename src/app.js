@@ -7,12 +7,14 @@ app.get("/", (req, res) => {
     res.send("Server is working");
 });
 
-app.use(
-    cors({
-        origin: process.env.CORS_ORIGIN,
-        Credential: true,
-    })
-);
+const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:5173"];
+app.use(cors({
+  origin: (origin, cb) => {
+    if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+    return cb(new Error("Not allowed by CORS"));
+  },
+  credentials: true,
+}));
 
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));

@@ -2,7 +2,14 @@ import { Router } from "express";
 
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
-import { editVideo, uploadVideo } from "../controllers/video.controller.js";
+import {
+    deleteVideo,
+    editVideo,
+    listAllVideos,
+    togglePrivacy,
+    uploadVideo,
+    watchVideo,
+} from "../controllers/video.controller.js";
 
 const router = Router();
 
@@ -21,6 +28,27 @@ router.route("/upload-video").post(
     uploadVideo
 );
 
-router.route("/edit-video/:videoId").post(upload.none(), verifyJWT, editVideo);
+router.route("/edit-video/:videoId").post(
+    upload.fields([
+        {
+            name: "newThumbnail",
+            maxCount: 1,
+        },
+    ]),
+    verifyJWT,
+    editVideo
+);
+
+router
+    .route("/delete-video/:videoId")
+    .delete(upload.none(), verifyJWT, deleteVideo);
+
+router
+    .route("/:videoId/togglePrivacy")
+    .put(verifyJWT, upload.none(), togglePrivacy);
+
+router.route("/all-videos").get(verifyJWT, listAllVideos);
+
+router.route("/watch-video/:videoId").get(verifyJWT, watchVideo);
 
 export default router;

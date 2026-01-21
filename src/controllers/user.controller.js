@@ -112,7 +112,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
     console.log("USERNAME:", username);
 
-    if (!email || !username) {
+    if (!(email || username)) {
         throw new ApiError(400, "Please enter username or email");
     }
 
@@ -353,32 +353,34 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
 });
 
 const getWatchHistory = asyncHandler(async (req, res) => {
-    const user = await User.aggregate(
+    const user = await User.aggregate([
         {
             $match: {
-                _id: new mongoose.Types.ObjectId(req.user._id),
+                _id: req.user._id,
             },
         },
         {
             $lookup: {
-                from: "video",
-                localField: "watchHistory",
+                from: "videos",
+                localField: "watchHistory.video",
                 foreignField: "_id",
                 as: "watchHistory",
                 pipeline: [
                     {
                         $lookup: {
-                            from: "user",
+                            from: "users",
                             localField: "owner",
                             foreignField: "_id",
                             as: "owner",
-                            pipeline: {
-                                $project: {
-                                    username: 1,
-                                    avatar: 1,
-                                    fullname: 1,
+                            pipeline: [
+                                {
+                                    $project: {
+                                        username: 1,
+                                        avatar: 1,
+                                        fullname: 1,
+                                    },
                                 },
-                            },
+                            ],
                         },
                     },
                     {
@@ -390,19 +392,29 @@ const getWatchHistory = asyncHandler(async (req, res) => {
                     },
                 ],
             },
-        }
-    );
+        },
+    ]);
 
     return res
         .status(200)
         .json(
             new ApiResponse(
                 200,
-                user[0].watchHisory,
+                user[0].watchHistory,
                 "watchHistory got fetched successfully"
             )
         );
 });
+
+// const getWatchHistory = asyncHandler(async (req, res) => {
+//     const user = await User.findById(req.user._id);
+
+//     const watchHistory = user.watchHistory;
+
+//     return res
+//         .status(200)
+//         .json(new ApiResponse(200, watchHistory, "successfull"));
+// });
 
 export {
     registerUser,

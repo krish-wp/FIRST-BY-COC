@@ -34,8 +34,15 @@ const userSchema = new mongoose.Schema(
         },
         watchHistory: [
             {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Video",
+                video: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "Video",
+                    required: true,
+                },
+                watchedAt: {
+                    type: Date,
+                    default: Date.now(),
+                },
             },
         ],
         password: {
@@ -63,6 +70,7 @@ userSchema.methods.isPasswordCorrect = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
 
+//for access token generation
 userSchema.methods.generateAccessToken = function () {
     return jwt.sign(
         {
@@ -78,6 +86,7 @@ userSchema.methods.generateAccessToken = function () {
     );
 };
 
+//for refresh token generation
 userSchema.methods.generateRefreshToken = function () {
     return jwt.sign(
         {
