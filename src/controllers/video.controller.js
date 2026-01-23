@@ -155,7 +155,7 @@ const togglePrivacy = asyncHandler(async (req, res) => {
 });
 
 const listAllVideos = asyncHandler(async (req, res) => {
-    const videos = await Video.find().select("videofile");
+    const videos = await Video.find();
 
     return res
         .status(200)
@@ -276,8 +276,6 @@ const watchVideo = asyncHandler(async (req, res) => {
         .status(200)
         .json(new ApiResponse(200, video, "Video Watched Successfully"));
 });
-
-//change thumbnail, edit private/public, delete video, etc can be added later
 
 export {
     uploadVideo,

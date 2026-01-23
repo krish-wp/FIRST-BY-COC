@@ -268,9 +268,11 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
 });
 
 const getCurrentUser = asyncHandler(async (req, res) => {
-    const user = req.user;
+    const user = await User.findById(req.user._id).select(
+        "-password -watchHistory -_id"
+    );
 
-    return res.status(200).json(new ApiResponse(200, user, "Use founded"));
+    return res.status(200).json(new ApiResponse(200, user, "User founded"));
 });
 
 const getUserChannelProfile = asyncHandler(async (req, res) => {
